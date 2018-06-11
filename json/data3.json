@@ -1,0 +1,37 @@
+ [
+    {
+       "imgs":"images/1.jpg",
+       "title":"梦想的声音 合辑",
+       "icons":"iconfont icon-gengduo",
+       "icons2":"iconfont icon-erji",
+       "ps":"36207653"
+    },
+     {
+       "imgs":"images/2.jpg",
+       "title":"热歌 合辑",
+       "icons":"iconfont icon-gengduo",
+       "icons2":"iconfont icon-erji",
+       "ps":"372385255"
+    },
+     {
+       "imgs":"images/3.jpg",
+       "title":"围炉音乐会 合辑",
+       "icons":"iconfont icon-gengduo",
+       "icons2":"iconfont icon-erji",
+       "ps":"46890991"
+    },
+     {
+       "imgs":"images/4.jpg",
+       "title":"百首华语挚爱情歌",
+       "icons":"iconfont icon-gengduo",
+       "icons2":"iconfont icon-erji",
+       "ps":"626714"
+    },
+     {
+       "imgs":"images/5.jpg",
+       "title":"最是粤语情深处",
+       "icons":"iconfont icon-gengduo",
+       "icons2":"iconfont icon-erji",
+       "ps":"36207653"
+    }
+]

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酷狗音乐</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-touch-fullscreen" content="yes">
+
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="myApp">
+<div class="dialog" ng-class="{'show':value}">
+    <div class="dialog-box">
+        <h1>下载需要手机酷狗客户端支持</h1>
+        <p><span ng-click="del()">取消</span><span ng-click="del()">在客户端下载</span></p>
+    </div>
+</div>
+    <header>
+        <i class="iconfont icon-sousuo head-right f20"></i>
+        <div class="head">
+            <p><img src="images/logo_kugou.png" alt=""></p>
+            <h2>酷狗音乐</h2>
+            <span>下载酷狗</span>
+        </div>
+    </header>
+    <section>
+        <ul class="list">
+            <li class="blue"><a href="#/songs">新歌</a></li>
+            <li><a href="#/ranking-list">排行</a></li>
+            <li><a href="#/song-list">歌单</a></li>
+            <li><a href="#/singer">歌手</a></li>
+        </ul>
+        <div class="container">
+            <div ng-view></div>
+        </div>
+    </section>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/event.js"></script>
+    <script src="js/touch.js"></script>
+    <script>
+        $(".list li").tap(function(){
+            $(this).addClass("blue").siblings().removeClass("blue");
+        })
+         var myApp=angular.module("myApp",["ngRoute"]);
+        // $routeProvider配置路由
+        myApp.config(function($routeProvider){
+            $routeProvider.when("/songs",{//新歌
+                templateUrl:"view/songs.html",
+                controller:function($rootScope,$log,json){
+                    $rootScope.data = json.data;
+                    //实例化轮播图
+                    new Swiper(".swiper-container",{
+                        autoplay:3000,
+                        pagination: ".swiper-pagination",
+                        paginationClickable: true
+                    });
+                },
+                resolve:{
+                    json:function($http){
+                        return $http.get('json/data1.json')
+                    }
+                }
+            })
+            .when("/ranking-list",{//排行
+                templateUrl:"view/ranking.html",
+                controller:function($scope,json){
+                    $scope.data=json.data;
+                },
+                resolve:{
+                     json:function($http){
+                          return $http.get('json/data2.json')
+                     }
+                }
+            })
+            .when("/song-list",{//歌单
+                templateUrl:"view/songList.html",
+                controller:function($scope,json){
+                    $scope.data=json.data;
+                },
+                resolve:{
+                    json:function($http){
+                        return $http.get('json/data3.json')
+                    }
+                }
+            })
+            .when("/singer",{//歌手
+                templateUrl:"view/singer.html",
+                controller:function($scope){
+                }
+            })
+            .otherwise("songs");//默认页面
+        })
+        //
+        myApp.run(function($rootScope){
+            $rootScope.dialog=function(){
+                $rootScope.value=true;
+            }
+            $rootScope.del=function(){
+                $rootScope.value=false;
+            }
+        })
+    </script>
+</body>
+</html>
